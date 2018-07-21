@@ -8,63 +8,39 @@ token = "649733112:AAEK-BgclHseZVIGPVKG6BEU05zxVHcZcVE"
 
 bot = telebot.TeleBot(token)
 
-tag = 0
-
-class human:
-    id = 0
-    group_name = ""
-    r = False
-    t = ""
-    name_pass_c = False
-    name_pass_j = False
-    kick_name = False
-    def __init__(self, x, y):
-        self.t = y
-        self.id = x
-
-class table:
-    leader = 0
-    password = ""
-    people = set()
-    r = set()
-    def __init__(self, x, y):
-        self.password = x
-        self.leader = y
-
-users = dict()
-tables = dict()
+main_server = server.serv(bot)
 
 @bot.message_handler(commands=["start"])
 def start(message):
-    server.start(message)
+    main_server.start(message)
 
 @bot.message_handler(commands=["create"])
-def create(message)
-    server.create(message)
+def create(message):
+    main_server.create(message)
 
 @bot.message_handler(commands=["join"])
 def join(message):
-    server.join(message)
+    main_server.join(message)
 
 @bot.message_handler(commands=["disconnect"])
 def disconnect(message):
-    server.disconnect(message)
+    main_server.disconnect(message)
 
 @bot.message_handler(commands=["ready"])
 def ready(message):
-    server.ready(message)
+    main_server.ready(message)
 
 @bot.message_handler(commands=["not_ready"])
 def not_ready(message):
-    server.not_ready(message)
+    main_server.not_ready(message)
 
 @bot.message_handler(commands=["kick"])
 def kick(message):        
-    server.kick(message)
+    main_server.kick(message)
 
 @bot.message_handler(content_types=["text"])
 def on_text(message):
-    server.on_text(message)
+    main_server.on_text(message)
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
