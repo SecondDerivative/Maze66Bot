@@ -2,6 +2,7 @@ import telebot
 from telebot import apihelper
 import server
 from utility import *
+from core import *
 
 class human:
     id = 0
@@ -17,6 +18,8 @@ class human:
 
 class table:
     leader = 0
+    game_core = None
+    game = False
     password = ""
     tags = set()
     people = set()
@@ -79,6 +82,10 @@ class serv:
             self.bot.send_message(message.chat.id, 'Great! You are ready to play.')
             self.users[message.chat.id].r = True
             self.tables[self.users[message.chat.id].group_name].r.add(message.chat.id)
+            if len(self.tables[self.users[message.chat.id].group_name].r) == len(self.tables[self.users[message.chat.id].group_name].people):
+                sent_message(self.bot, -1, self.tables[self.users[message.chat.id].group_name].r, "Ready! Set! GO!")
+                self.tables[self.users[message.chat.id].group_name].game = True
+                self.tables[self.users[message.chat.id].group_name].game_core = core.core(self.bot, len(self.tables[self.users[message.chat.id].group_name].r), self.tables[self.users[message.chat.id].group_name])
 
     def not_ready(self, message):
         if self.users[message.chat.id].group_name == "" :
@@ -140,6 +147,8 @@ class serv:
                 sent_message(self.bot, message.chat.id, self.tables[self.users[message.chat.id].group_name].people, kt + 'was kiked.')
             else:
                 self.bot.send_message(message.chat.id, "Sorry, there are no players with this tag.")
+        elif self.tables[self.users[message.chat.id].group_name].game:
+            self.tables[self.users[message.chat.id].group_name].game_core.walk(message)
         else:
             if self.users[message.chat.id].group_name == "":
                 self.bot.send_message(message.chat.id, "Write /create to make your own table. \nWrite /join to connect to table. \nWrite /disconnect to leave the table.")
