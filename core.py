@@ -21,18 +21,20 @@ class core:
             self.players.append(player(i))
 
     def walk(self, message):
-        p = self.players[step]
-        if message.txt == "Up": dx, dy = 0, -1
-        elif message.txt == "Down": dx, dy = 0, 1
-        elif message.txt == "Right": dx, dy = 1, 0
-        elif message.txt == "Left": dx, dy = -1, 0
-        else: self.bot.send_message(message.chat.id, "Sorry, this is an incorrect input form. Try again.")
+        p = self.players[self.step]
+        cur_id = message.chat.id
+        txt = message.text
+        if txt == "Up": dx, dy = 0, -1
+        elif txt == "Down": dx, dy = 0, 1
+        elif txt == "Right": dx, dy = 1, 0
+        elif txt == "Left": dx, dy = -1, 0
+        else: self.bot.send_message(cur_id, "Sorry, this is an incorrect input form. Try again.")
         if p.x + dx < 6 and p.y + dy < 6 and p.x + dx >= 0 and p.y + dy >= 0:
-            self.bot.send_message(message.chat.id, "Well done!")
-            sent_message(self.bot, message.chat.id, players, message.chat.first_name + " went " + message.txt + "!")
+            self.bot.send_message(cur_id, "Well done!")
+            sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + "!")
             p.x += dx
             p.y += dy
         else:
-            self.bot.send_message(message.chat.id, "There is a wall!")
-            sent_message(self.bot, message.chat.id, players, message.chat.first_name + " went " + message.txt + "! But there is a wall.")
-        step = (step + 1) % cnt
+            self.bot.send_message(cur_id, "There is a wall!")
+            sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + "! But there is a wall.")
+        self.step = (self.step + 1) % self.cnt
