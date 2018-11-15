@@ -21,11 +21,15 @@ class core:
     players = []
     cnt = 0
     step = 0
-    maze = walls(gen.hor, gen.ver)
-    
+    maze = None
+
     def __init__(self, x, y, users):
         self.bot = x
         self.cnt = y
+        hor = [[False] * 6 for _ in range(5)]
+        ver = [[False] * 6 for _ in range(5)]
+        generate(hor, ver, 6, 6)
+        self.maze = walls(hor, ver)
         for i in users:
             self.players.append(player(i))
 

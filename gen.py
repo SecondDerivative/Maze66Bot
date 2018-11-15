@@ -18,7 +18,7 @@ def un(v1, v2, par, deep):
     if deep[v1] == deep[v2]:
         deep[v2] += 1
 
-def gen(hor, ver, w, h):
+def generate(hor, ver, w, h):
     edge = []
     for i in range(w - 1):
         for j in range(h - 1):
