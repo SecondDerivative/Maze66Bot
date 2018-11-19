@@ -1,10 +1,12 @@
 from utility import *
 from gen import *
+import random
 
 class player:
     id = 0
     x = 0
     y = 0
+    key = False
     bullets = 1 
     def __init__(self, x):
         self.id = x
@@ -21,11 +23,24 @@ class core:
     players = []
     cnt = 0
     step = 0
+    key = [0, 0]
+    door = [0, 0]
     maze = None
 
     def __init__(self, x, y, users):
         self.bot = x
         self.cnt = y
+        if random.randint(0, 1):
+            if random.randint(0, 1):
+                self.door = [0, random.randint(0,5)]
+            else:
+                self.door = [5, random.randint(0,5)
+        else:
+            if random.randint(0, 1):
+                self.door = [random.randint(0,5), 0]
+            else:
+                self.door = [random.randint(0,5), 5]
+        self.key = [random.randint(0, 5), random.randint(0, 5)]
         hor = [[False] * 6 for _ in range(5)]
         ver = [[False] * 6 for _ in range(5)]
         generate(hor, ver, 6, 6)
@@ -48,6 +63,13 @@ class core:
             sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + "!")
             p.x += dx
             p.y += dy
+            if p.x == self.key[0] and p.y = self.key[1]:
+                self.key = [7, 7]
+                p.key = True
+            elif p.x == self.door[0] and p.y == self.door[1] and key:
+                self.bot.send_message(cur_id, "Congratulations! You are the winner!")
+                sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + " and won the game!")
+                return
         else:
             self.bot.send_message(cur_id, "There is a wall!")
             sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + "! But there is a wall.")
