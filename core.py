@@ -7,7 +7,6 @@ class player:
     x = 0
     y = 0
     key = False
-    bullets = 1 
     def __init__(self, x):
         self.id = x
 
@@ -34,13 +33,15 @@ class core:
             if random.randint(0, 1):
                 self.door = [0, random.randint(0,5)]
             else:
-                self.door = [5, random.randint(0,5)
+                self.door = [5, random.randint(0,5)]
         else:
             if random.randint(0, 1):
                 self.door = [random.randint(0,5), 0]
             else:
                 self.door = [random.randint(0,5), 5]
         self.key = [random.randint(0, 5), random.randint(0, 5)]
+        while self.key == self.door:
+            self.key = [random.randint(0, 5), random.randint(0, 5)]
         hor = [[False] * 6 for _ in range(5)]
         ver = [[False] * 6 for _ in range(5)]
         generate(hor, ver, 6, 6)
@@ -64,7 +65,6 @@ class core:
             p.x += dx
             p.y += dy
             if p.x == self.key[0] and p.y = self.key[1]:
-                self.key = [7, 7]
                 p.key = True
             elif p.x == self.door[0] and p.y == self.door[1] and key:
                 self.bot.send_message(cur_id, "Congratulations! You are the winner!")
