@@ -36,9 +36,9 @@ class core:
                 self.door = [5, random.randint(0,5)]
         else:
             if random.randint(0, 1):
-                self.door = [random.randint(0,5), 0]
+                self.door = [random.randint(0, 5), 0]
             else:
-                self.door = [random.randint(0,5), 5]
+                self.door = [random.randint(0, 5), 5]
         self.key = [random.randint(0, 5), random.randint(0, 5)]
         while self.key == self.door:
             self.key = [random.randint(0, 5), random.randint(0, 5)]
@@ -64,9 +64,11 @@ class core:
             sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + "!")
             p.x += dx
             p.y += dy
-            if p.x == self.key[0] and p.y = self.key[1]:
+            if p.x == self.key[0] and p.y == self.key[1]:
                 p.key = True
-            elif p.x == self.door[0] and p.y == self.door[1] and key:
+                self.bot.send_message(cur_id, "WoW! You have got a key!")
+                sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + " and got a key!")
+            elif p.x == self.door[0] and p.y == self.door[1] and p.key:
                 self.bot.send_message(cur_id, "Congratulations! You are the winner!")
                 sent_message(self.bot, cur_id, self.players, message.chat.first_name + " went " + txt + " and won the game!")
                 return
