@@ -32,10 +32,10 @@ def generate(hor, ver, w, h):
         v1 = i[1]
         v2 = i[2]
         if get(v1, par) != get(v2, par):
-            r = v1 % h
-            c = v1 // h
+            r = v1 // h
+            c = v1 % h
             if v2 - v1 == 1:
-                ver[c][r] = True
+                ver[r][c] = True
             else:
-                hor[r][c] = True
+                hor[c][r] = True
             un(v1, v2, par, deep)
