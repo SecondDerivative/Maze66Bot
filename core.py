@@ -42,8 +42,8 @@ class core:
         self.key = [random.randint(0, 5), random.randint(0, 5)]
         while self.key == self.door:
             self.key = [random.randint(0, 5), random.randint(0, 5)]
-        hor = [[False] * 6 for _ in range(5)]
-        ver = [[False] * 6 for _ in range(5)]
+        hor = [[False] * 5 for _ in range(6)]
+        ver = [[False] * 5 for _ in range(6)]
         generate(hor, ver, 6, 6)
         self.maze = walls(hor, ver)
         for i in users:
