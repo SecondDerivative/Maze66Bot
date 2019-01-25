@@ -105,7 +105,7 @@ class serv:
             return
         elif cur_user.r:
             cur_table = self.tables[cur_user.group_name]
-            sent_message(self.bot, cur_id, cur_table.people, message.chat.first_name + cur_user.t + ' is ready to play.')
+            sent_message(self.bot, cur_id, cur_table.people, message.chat.first_name + cur_user.t + "isn't ready to play.")
             self.bot.send_message(message.chat.id, 'Exellent! You are not ready to play.')
             cur_user.r = False
             cur_table.r.discard(cur_id)
