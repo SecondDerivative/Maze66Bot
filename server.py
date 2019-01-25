@@ -44,6 +44,7 @@ class serv:
         self.users[cur_id] = human(cur_id, "#" + ("%04d" % self.tag))
         self.marks["#" + ("%04d" % self.tag)] = cur_id #moe yvojenie
         self.tag += 1
+        sent_message(self.bot, -1, [cur_id], "You are in!") 
 
     def create(self, message):
         cur_id = message.chat.id
@@ -93,8 +94,8 @@ class serv:
             cur_table.r.add(message.chat.id)
             if len(cur_table.r) == len(cur_table.people):
                 sent_message(self.bot, -1, cur_table.r, "Ready! Set! GO!")
-                cur_table.game = True
-                cur_table.game_core = core(self.bot, len(self.tables[self.users[message.chat.id].group_name].r), self.tables[self.users[message.chat.id].group_name])
+                cur_table.game = True                
+                cur_table.game_core = core(self.bot, len(cur_table.r), cur_table.people)
 
     def not_ready(self, message):
         cur_id = message.chat.id
@@ -139,7 +140,7 @@ class serv:
                 self.tables[np[0]] = table(np[1], cur_id)
                 cur_user.group_name = np[0]
                 self.tables[np[0]].people.add(cur_id)
-                self.tables[np[0]].tags.add(cur_id.t)
+                self.tables[np[0]].tags.add(cur_user.t)
                 self.bot.send_message(cur_id, 'My respect! You managed to create a table "' + np[0] + '".')
                 cur_user.name_pass_c = False
         elif self.users[message.chat.id].name_pass_j:

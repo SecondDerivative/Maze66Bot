@@ -52,12 +52,14 @@ class core:
     def walk(self, message):
         p = self.players[self.step]
         cur_id = message.chat.id
-        txt = message.text
-        if txt == "Up": dx, dy = 0, -1
-        elif txt == "Down": dx, dy = 0, 1
-        elif txt == "Right": dx, dy = 1, 0
-        elif txt == "Left": dx, dy = -1, 0
-        else: self.bot.send_message(cur_id, "Sorry, this is an incorrect input form. Try again.")
+        txt = message.text.lower()
+        if txt == "up": dx, dy = 0, -1
+        elif txt == "down": dx, dy = 0, 1
+        elif txt == "right": dx, dy = 1, 0
+        elif txt == "left": dx, dy = -1, 0
+        else: 
+            self.bot.send_message(cur_id, "Sorry, this is an incorrect input form. Try again.")
+            return
         if ((p.x + dx < 6 and p.y + dy < 6 and p.x + dx >= 0 and p.y + dy >= 0) and
         ((dx == 0 and self.maze.hor[p.x][(p.y * 2 + dy) // 2]) or (dy == 0 and self.maze.ver[p.y][(p.x * 2 + dx) // 2]))):
             self.bot.send_message(cur_id, "Well done!")
