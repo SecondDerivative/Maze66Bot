@@ -1,6 +1,7 @@
 import telebot
 from telebot import apihelper
 import server
+import core
 
 apihelper.proxy = {'https':'https://1.20.102.54:37042'}
 
