@@ -48,15 +48,16 @@ class core:
         self.maze = walls(hor, ver)
         for i in users:
             self.players.append(player(i))
-
+    
     def walk(self, message):
         p = self.players[self.step]
-        sent_message(self.bot, -1, self.players, message.chat.first_name + " is walking now.")
         cur_id = message.chat.id
         txt = message.text.lower()
         if cur_id != p.id:
             self.bot.send_message(cur_id, "Ow, it's not your turn.")
+            return
         else:
+            sent_message(self.bot, -1, self.players, message.chat.first_name + " is walking now.")
             if txt == "up": dx, dy = 0, -1
             elif txt == "down": dx, dy = 0, 1
             elif txt == "right": dx, dy = 1, 0
