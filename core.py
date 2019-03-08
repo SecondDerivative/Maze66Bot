@@ -7,8 +7,10 @@ class player:
     x = 0
     y = 0
     key = False
-    def __init__(self, x):
-        self.id = x
+    def __init__(self, ID, xpos, ypos):
+        self.id = ID
+        self.x = xpos
+        self.y = ypos
 
 class walls:
     ver = []
@@ -48,8 +50,10 @@ class core:
         ver = [[False] * 5 for _ in range(6)]
         generate(hor, ver, 6, 6)
         self.maze = walls(hor, ver)
+        posx = list(filter(lambda i: i != self.key[0], [0, 1, 2, 3, 4, 5]))
+        posy = list(filter(lambda i: i != self.key[1], [0, 1, 2, 3, 4, 5]))
         for i in users:
-            self.players.append(player(i))
+            self.players.append(player(i, random.choice(posx), random.choice(posy)))
     
     def walk(self, message):
         p = self.players[self.step]
