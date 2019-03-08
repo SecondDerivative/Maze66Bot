@@ -3,7 +3,7 @@ from telebot import apihelper
 import server
 import core
 
-apihelper.proxy = {'https':'https://1.20.102.54:37042'}
+apihelper.proxy = {'https':'https://1.20.101.77:44440'}
 
 token = "649733112:AAEK-BgclHseZVIGPVKG6BEU05zxVHcZcVE"
 
