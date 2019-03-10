@@ -29,9 +29,10 @@ class core:
     door = [0, 0]
     maze = None
 
-    def __init__(self, x, y, users):
+    def __init__(self, x, y, users, CB):
         self.bot = x
         self.cnt = y
+        self.end_CB = CB
         self.users = users
         if random.randint(0, 1):
             if random.randint(0, 1):
@@ -60,7 +61,7 @@ class core:
         cur_id = message.chat.id
         txt = message.text.lower()
         if cur_id != p.id:
-            self.bot.send_message(cur_id, "Ow, it's not your turn.")
+            self.bot.send_message(cur_id, "Oi, it's not your turn.")
             return
         else:
             sent_message(self.bot, -1, self.users, message.chat.first_name + " is walking now.")
@@ -84,7 +85,9 @@ class core:
                 elif p.x == self.door[0] and p.y == self.door[1] and p.key:
                     self.bot.send_message(cur_id, "Congratulations! You are the winner!")
                     sent_message(self.bot, cur_id, self.users, message.chat.first_name + " went " + txt + " and won the game!")
-                    return
+                    self.end_CB()
+                    sent_message(self.bot, -1, self.users, "Game has been ended. Oi-oi! Everybody isn't ready.")
+                    return 
             else:
                 self.bot.send_message(cur_id, "There is a wall!")
                 sent_message(self.bot, cur_id, self.users, message.chat.first_name + " went " + txt + "! But there is a wall.")

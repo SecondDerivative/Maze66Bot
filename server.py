@@ -93,9 +93,16 @@ class serv:
             cur_user.r = True
             cur_table.r.add(message.chat.id)
             if len(cur_table.r) == len(cur_table.people):
+
+                def CB():
+                    for i in cur_table.people:
+                        self.users[i].r = False
+                    cur_table.game = False
+                    cur_table.r = set()
+
                 sent_message(self.bot, -1, cur_table.r, "Ready! Set! GO!")
                 cur_table.game = True                
-                cur_table.game_core = core(self.bot, len(cur_table.r), cur_table.people)
+                cur_table.game_core = core(self.bot, len(cur_table.r), cur_table.people, CB)
 
     def not_ready(self, message):
         cur_id = message.chat.id
