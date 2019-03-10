@@ -25,6 +25,13 @@ def generate(hor, ver, w, h):
             cur = i * h + j
             edge.append((ri(0, 100000000000), cur, cur + 1))
             edge.append((ri(0, 100000000000), cur, cur + h))
+    for i in range(w - 1):
+        cur = i * h + h - 1
+        edge.append((ri(0, 100000000000), cur, cur + h))
+    for j in range(h - 1):
+        cur = (w - 1) * h + j
+        edge.append((ri(0, 100000000000), cur, cur + 1))
+    
     par = [i for i in range(w * h)]
     deep = [0] * (w * h)
     edge.sort()
