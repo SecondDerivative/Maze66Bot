@@ -1,11 +1,14 @@
 from random import randint as ri
 
+
+# Генераци лабиринта ввиде дерева
 def get(v1, par):
     if par[v1] == v1:
         return v1
     ans = get(par[v1], par)
     par[v1] = ans
     return ans
+
 
 def un(v1, v2, par, deep):
     v1 = get(v1, par)
@@ -17,6 +20,7 @@ def un(v1, v2, par, deep):
     par[v1] = v2
     if deep[v1] == deep[v2]:
         deep[v2] += 1
+
 
 def generate(hor, ver, w, h):
     edge = []
