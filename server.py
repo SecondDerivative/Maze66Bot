@@ -97,7 +97,7 @@ class serv:
             cur_user = self.users[cur_id]
             cur_table = self.tables[cur_user.group_name]
             sent_message(self.bot, cur_id, cur_table.people, message.chat.first_name + cur_user.t + ' leaved table "' + cur_user.group_name + '".')
-            cur_table[cur_user.group_name].people.discard(cur_id)
+            cur_table.people.discard(cur_id)
             cur_table.tags.discard(cur_user.t)
             cur_user.group_name = ""
             self.bot.send_message(cur_id, "Fine! You leaved this table.", reply_markup=serv.keyboard1)
@@ -220,7 +220,7 @@ class serv:
                 sent_message(self.bot, cur_id, cur_table.people, kt + 'was kiked.')
             else:
                 self.bot.send_message(cur_id, "Sorry, there are no players with this tag.")
-        elif self.tables[cur_user.group_name].game:
+        elif cur_user.group_name != '' and self.tables[cur_user.group_name].game:
             # Процесс хода в игре
             self.tables[cur_user.group_name].game_core.walk(message)
         else:

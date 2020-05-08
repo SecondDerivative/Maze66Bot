@@ -164,7 +164,7 @@ class core:
                         self.bot.send_message(i.id, "You caught the bullet. You are in the hospital now.")
                         i.x, i.y = self.hospital
                         kill_streak += 1
-                self.bot.send_message(cur_id, "You have killed " + kill_streak + " people.", reply_markup=core.keyboard5)
+                self.bot.send_message(cur_id, "You have killed " + str(kill_streak) + " people.", reply_markup=core.keyboard5)
             elif txt == "right":
                 kill_streak = 0
                 for i in self.players:
@@ -172,7 +172,7 @@ class core:
                         self.bot.send_message(i.id, "You caught the bullet. You are in the hospital now.")
                         i.x, i.y = self.hospital
                         kill_streak += 1
-                self.bot.send_message(cur_id, "You have killed " + kill_streak + " people.", reply_markup=core.keyboard5)
+                self.bot.send_message(cur_id, "You have killed " + str(kill_streak) + " people.", reply_markup=core.keyboard5)
             elif txt == "left":
                 kill_streak = 0
                 for i in self.players:
@@ -180,7 +180,7 @@ class core:
                         self.bot.send_message(i.id, "You caught the bullet. You are in the hospital now.")
                         i.x, i.y = self.hospital
                         kill_streak += 1
-                self.bot.send_message(cur_id, "You have killed " + kill_streak + " people.", reply_markup=core.keyboard5)
+                self.bot.send_message(cur_id, "You have killed " + str(kill_streak) + " people.", reply_markup=core.keyboard5)
             else: 
                 self.bot.send_message(cur_id, "Sorry, this is an incorrect input form. Try again.")
                 return

@@ -5,7 +5,7 @@ import core
 
 
 # Прописываем прокси и токен
-apihelper.proxy = {'https':'https://163.172.190.160:8811'}
+apihelper.proxy = {'https':'https://149.28.154.226:8080'}
 token = "649733112:AAEK-BgclHseZVIGPVKG6BEU05zxVHcZcVE"
 
 # Заводим объект класса telebot.TeleBot
